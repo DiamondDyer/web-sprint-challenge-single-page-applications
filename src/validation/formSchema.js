@@ -9,6 +9,9 @@ const formSchema = yup.object().shape({
   pizzaSize: yup
     .string()
     .oneOf(['small', 'medium', 'large', 'extra large'], "Pizza Size is required"),
+
+  specialInstructions: yup
+    .string()
  
 })
 

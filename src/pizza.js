@@ -1,5 +1,51 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import styled from 'styled-components'
+const StyledForm = styled.div`
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+.form-group-inputs{
+  display:flex;
+  flex-direction:column;
+}
+
+.form-group-checkboxes{
+  display:flex;
+  flex-direction:column;
+}
+
+h2{
+  color:red;
+  border: 2px solid yellow;
+  font-size:4rem;
+}
+
+h4{
+  color:red;
+  border: 2px solid yellow;
+  font-size:2rem;
+}
+
+label{
+  margin: 2%;
+}
+
+button{
+  font-size:2rem;
+  width: 200px;
+  height:80px;
+  border: 2px solid yellow;
+  color: red;
+  margin-top : 10%;
+}
+
+.errors{
+  color:red;
+}
+`
 
 export default function Pizza(props) {
   const {
@@ -11,13 +57,7 @@ export default function Pizza(props) {
     errors,
   } = props
 
-  const history = useHistory()
-
-  const routeToConfirm = () => {
  
-    console.log(history)
-    history.push('/Confirm')
-  }
 
   const onSubmit = evt => {
     evt.preventDefault()
@@ -35,28 +75,23 @@ export default function Pizza(props) {
   }
 
   return (
+    <StyledForm>
     <form className='form container' onSubmit={onSubmit}>
         
       <div className='form-group submit'>
         <h2>Customize Your Pizza</h2>
+        <Link to ="/">Home</Link>
 
        
        
 
-        <div className='errors'>
-          
-          <div>{errors.name}</div>
-          <div>{errors.pizzaSize}</div>
-        
-        </div>
+     
       </div>
 
-      <div className='form-group inputs'>
+      <div className='form-group-inputs'>
         <h4>Make Your Pizza</h4>
 
-        {/* ////////// TEXT INPUTS ////////// */}
-        {/* ////////// TEXT INPUTS ////////// */}
-        {/* ////////// TEXT INPUTS ////////// */}
+       
         <label>Name&nbsp;
           <input
             value={values.name}
@@ -66,9 +101,9 @@ export default function Pizza(props) {
           />
         </label>
 
-        {/* ////////// DROPDOWN ////////// */}
-        {/* ////////// DROPDOWN ////////// */}
-        {/* ////////// DROPDOWN ////////// */}
+        <div className = 'errors'>{errors.name}</div>
+
+    
         <label>Pizza Size
           <select
             onChange={onInputChange}
@@ -82,14 +117,12 @@ export default function Pizza(props) {
             <option value='extra large'>Extra Large</option>
           </select>
         </label>
+        <div className = 'errors'>{errors.pizzaSize}</div>
         </div>
 
-      <div className='form-group checkboxes'>
+      <div className='form-group-checkboxes'>
         <h4>Toppings</h4>
 
-        {/* ////////// CHECKBOXES ////////// */}
-        {/* ////////// CHECKBOXES ////////// */}
-        {/* ////////// CHECKBOXES ////////// */}
         <label>Cheese
           <input
             type="checkbox"
@@ -138,8 +171,9 @@ export default function Pizza(props) {
         </label>
         </div>
 
-        <button disabled={disabled} onClick ={routeToConfirm}>Add to Order</button>
+      <button className ="btn" disabled={disabled} >Add to Order</button>
       </div>
     </form>
+    </StyledForm>
   )
 }
